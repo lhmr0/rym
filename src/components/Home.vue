@@ -102,7 +102,9 @@
 
         mensaje(dato){
           console.log(dato)
-          this.$router.push('/movies/'+dato)
+          var parts = dato.split('/');
+          var answer = parts[parts.length - 1];
+          this.$router.push('/movies/'+answer)
         }
       }
   }
