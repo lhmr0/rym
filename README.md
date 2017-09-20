@@ -1,2 +1,2 @@
 # RateYourMovie
-https://educordova.github.io/RateYourMovie/#/
+https://luishmr0.github.io/rym/#/
