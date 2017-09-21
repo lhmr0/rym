@@ -77,13 +77,12 @@
           this.isFetching = true
 
 
-          axios.get(`https://query.wikidata.org/sparql?format=json&query=SELECT ?movie ?movieLabel ?movieYear ?movieDuration ?image WHERE {
+          axios.get(`https://query.wikidata.org/sparql?format=json&query=SELECT ?movie ?movieLabel  ?movieDuration ?image WHERE {
   ?movie wdt:P31 wd:Q11424.
   ?movie rdfs:label ?movieLabel.
    
   OPTIONAL { ?movie wdt:P18 ?image.}
   OPTIONAL { ?movie wdt:P2047 ?movieDuration.}
-  OPTIONAL { ?movie wdt:P577 ?movieYear. }
  
   FILTER(LANGMATCHES(LANG(?movieLabel), "es"))
   FILTER(REGEX(STR(?movieLabel), "${this.name}"))
