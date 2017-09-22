@@ -14,6 +14,13 @@ Informe
 * Ejemplos de json-ld o rdfa
 * Resultados / Indexación.
 
+22/09
+============
+**Sitemap
+**Ontologias a usar
+**json/ld para cada pag
+**Renderizado offline
+
 Trabajo para Laboratorio
 ============
 * **Vuejs / Express**
