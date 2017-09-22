@@ -16,10 +16,10 @@ Informe
 
 22/09
 ============
-**Sitemap
-**Ontologias a usar
-**json/ld para cada pag
-**Renderizado offline
+**Sitemap**
+**Ontologias a usar**
+**json/ld para cada pag**
+**Renderizado offline**
 
 Trabajo para Laboratorio
 ============
