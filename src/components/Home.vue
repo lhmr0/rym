@@ -1,19 +1,15 @@
 <template>
   <section>
-    <div class="container is-fullhd fondo" >
-    <center>
-      <br><br><br><br><br><br><br>
-      <h4 class="subtitle is-4 blanco">Welcome!</h4>
-      <h1 class="title is-1 blanco">SEARCH AND RATE</h1>  
-       <h1 class="subtitle is-1 blanco">A MOVIE EASILY!</h1>
-     </center>
-     <br>
-
-    
-     
-    
-      <div class="column ">
-        <b-autocomplete  v-model="name" :data="data" placeholder="Search a movie title..." icon="search" field="title" :loading="isFetching" @input="getAsyncData" @select="option => selected = option">
+    <section class="hero is-dark is-fullheight">
+    <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+      Welcome
+      </h1>
+      <h2 class="subtitle">
+      SEARCH AND RATE
+      </h2>
+      <b-autocomplete  v-model="name" :data="data" placeholder="Search a movie title..." icon="search" field="title" :loading="isFetching" @input="getAsyncData" @select="option => selected = option">
           <template scope="props" >
             <div class="media" @click="mensaje(props.option.movie.value)">
               <div class="media-left">
@@ -30,15 +26,9 @@
             </div>
           </template>
         </b-autocomplete>
-      </div>        
-    </div>   
-
-     <nav class="container is-mobile">     
-     <h4 class="subtitle is-4"><center>Proudly done with PHP! (?)</center></h4>
-      <br><div class="level-item has-text-centered">
-        <img src="http://lhmr.tech/content/images/2016/10/darth.png" alt="Rate your movie!"  width="150" height="160">
-      </div>
-    </nav>
+    </div>
+    </div>
+  </section> 
     
 </section>
 
@@ -55,7 +45,13 @@
 <script>
   //importamos axios
   import axios from 'axios'
-  import debounce from 'lodash/debounce'
+  var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+    };
+  })();
 
   export default {
     created(){
@@ -72,32 +68,35 @@
       methods: {
         // You have to install and import debounce to use it,
         // it's not mandatory though.
-        getAsyncData: debounce(function() {
-          this.data = []
-          this.isFetching = true
+        getAsyncData(){
+        const self = this;
+      delay(function() {
+        self.data = []
+        self.isFetching = true
 
 
-          axios.get(`https://query.wikidata.org/sparql?format=json&query=SELECT ?movie ?movieLabel  ?movieDuration ?image WHERE {
-  ?movie wdt:P31 wd:Q11424.
-  ?movie rdfs:label ?movieLabel.
+        axios.get(`https://query.wikidata.org/sparql?format=json&query=SELECT ?movie ?movieLabel  ?movieDuration ?image WHERE {
+    ?movie wdt:P31 wd:Q11424.
+    ?movie rdfs:label ?movieLabel.
+     
+    OPTIONAL { ?movie wdt:P18 ?image.}
+    OPTIONAL { ?movie wdt:P2047 ?movieDuration.}
    
-  OPTIONAL { ?movie wdt:P18 ?image.}
-  OPTIONAL { ?movie wdt:P2047 ?movieDuration.}
- 
-  FILTER(LANGMATCHES(LANG(?movieLabel), "es"))
-  FILTER(REGEX(STR(?movieLabel), "${this.name}"))
-}`)
-            .then(({
-              data
-            }) => {
-              data.results.bindings.forEach((item) => this.data.push(item))
-              this.isFetching = false
-              console.log(data)
-            }, response => {
-              this.isFetching = false
-              console.log(data)
-            })
-        }, 500),
+    FILTER(LANGMATCHES(LANG(?movieLabel), "es"))
+    FILTER(REGEX(STR(?movieLabel), "${self.name}"))
+  }`)
+        .then(({
+          data
+        }) => {
+          data.results.bindings.forEach((item) => self.data.push(item))
+          self.isFetching = false
+          console.log(data)
+        }, response => {
+          self.isFetching = false
+          console.log(data)
+        });
+      }, 500);
+    },
 
         mensaje(dato){
           console.log(dato)
@@ -111,22 +110,15 @@
 </script>
 
 
-<style>
-.fondo{
-color:#fff;
-background-image:url(https://luishmr0.github.io/semanticmovies/img/bg.jpg);
-background-repeat:no-repeat;
-background-attachment:scroll;
-background-position:center center;
--webkit-background-size:cover;
--moz-background-size:cover;
--o-background-size:cover;
-background-size:cover;
-width:100%;
-height:100%;
-}
-.blanco{
-color:#fff;
-font-family:'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;
-}
+<style scoped>
+  .hero {
+    background-image:url(https://luishmr0.github.io/semanticmovies/img/bg.jpg);
+    background-repeat:no-repeat;
+    background-attachment:scroll;
+    background-position:center center;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;    
+  }
 </style>

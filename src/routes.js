@@ -8,8 +8,8 @@ import CategoriesId  from './components/Id.vue'
 //exportamos las rutas
 export const routes =[
     {path:'/',component:Home},
-    {path:'/movies/:id',component:Movie},
-     {path:'/categories/:id',component:CategoriesId},
+    {path:'/movies/:id',component:Movie, props: true},
+    {path:'/categories/:id',component:CategoriesId},
     {path:'/about',component:About},
     {path:'/categories',component:Categories},
 	{path:'*',component:NotFound}
