@@ -1,10 +1,10 @@
   var config = {
-    apiKey: "AIzaSyBOxpkTFKkqMgxrQvgJDUHeDYeVg6_O4xE",
-    authDomain: "ng-notas-7f3c9.firebaseapp.com",
-    databaseURL: "https://ng-notas-7f3c9.firebaseio.com",
-    projectId: "ng-notas-7f3c9",
-    storageBucket: "ng-notas-7f3c9.appspot.com",
-    messagingSenderId: "758329408990"
+    apiKey: "AIzaSyBob5MKFbXZRPEP3qDzPWxGCGBSXiLm6jY",
+    authDomain: "rateym-3b052.firebaseapp.com",
+    databaseURL: "https://rateym-3b052.firebaseio.com",
+    projectId: "rateym-3b052",
+    storageBucket: "rateym-3b052.appspot.com",
+    messagingSenderId: "839937300390"
   };
 
 export default config;

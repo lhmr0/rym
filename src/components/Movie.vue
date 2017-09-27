@@ -1,31 +1,31 @@
 <template>
-  <div class="container is-mobile">
-    <div class="column">
-      <center>
-        <h1 class="title is-1">{{movie.movieLabel }}</h1>
-        <h1 v-if="loading">Cargando...</h1>
-      </center>
-    </div>
+  <div class="container is-mobile">    
+<section class="hero is-dark">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+      <center> {{movie.movieLabel }}</center>
+      </h1>
+      </div>
+  </div>
 
-    <center>
-      <img :src="uri" alt=" Rate your movie!" height="350" width="300">
-      <img :src="uri" alt=" Rate your movie!" height="350" width="300">
-      <p>
-        <b>Average Rating : {{movie.vote_average}}/10</b>
-      </p>
+</section>
+      <h2 class="subtitle">
+       <center> <img :src="uri" alt=" Rate your movie!" height="350" width="300"></center>
+      </h2>
 
-    </center>
-
-    <div class="tile is-ancestor">
-      <div class="tile is-4 is-vertical is-parent">
-        <div class="tile is-child box">
-          <p class="title">Director(es):</p>
+   <div class="tile is-ancestor">
+  <div class="tile is-vertical is-8">
+    <div class="tile">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification is-dark">
+         <p class="title">Director(es):</p>
           <p v-for="nom in movie.crew">
             {{nom}}
           </p>
-        </div>
-        <div class="tile is-child box">
-          <p class="title">Reparto:</p>
+        </article>
+        <article class="tile is-child notification is-dark">
+         <p class="title">Reparto:</p>
           <b-panel header="Abrir/Cerrar" has-custom-template collapsible :open.sync="isOpen">
             <div class="panel-block">
               <div class="content">
@@ -35,34 +35,61 @@
               </div>
             </div>
           </b-panel>
-        </div>
-        <div class="tile is-child box">
-          <center>
-            <youtube :video-id="videoId" player-width="320" player-height="100" :player-vars="{ autoplay: 0 }"></youtube>
-          </center>
-        </div>
+        </article>
       </div>
       <div class="tile is-parent">
-        <div class="tile is-child box">
-          <p class="title">+ detalles: </p>
-          <p>Productoras:</p>
+        <article class="tile is-child notification is-dark">
+          <p class="title">Trailer</p>
+          <center>
+            <youtube :video-id="videoId" player-width="300" player-height="220"></youtube>
+          </center>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child notification is-dark">
+     <p class="title">Detalles:</p>
+         <p>Productoras:</p>
           <p v-for="nom in movie.producers">
             {{nom}}
-          </p><br>
-          <p>Duración: {{movie.movieDuration }}</p><br>
+          </p>
+          <p>Duración: {{movie.movieDuration }}</p>
           <p>Género(s): </p>
           <p v-for="nom in movie.genre">
             {{nom}}
-          </p><br>
-        </div>
+          </p>
+    </article>
+  </div>
+</div>
+
+
+<div class="tile is-parent">
+      <article class="tile is-child notification is-dark">
+         <div class="content">       
+          <p class="title">Comentarios:</p>
+          
       </div>
+      </article>
     </div>
-  <br>
-  <ul>
-    <li v-for="m in mensajes">
-      {{m.mensaje}}
-    </li>
-  </ul>
+
+ 
+    <div class="tile is-parent" v-for="m in mensajes">
+     
+       <article class="media">
+        <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="http://bulma.io/images/placeholders/128x128.png">                
+              </p>
+            </figure>
+
+        <div class="media-content">   
+        {{m.author + ":"}}         
+          {{m.mensaje}}         
+        </div>
+      </article>
+
+    </div>
 
     <br><br><br>
     <form @submit.prevent="enviar">
@@ -74,10 +101,14 @@
             </figure>
 
         <div class="media-content">
-         
+         <div class="field">
+            <p class="control">              
+              <input required class="input" placeholder="Add an author" v-model="comentario.aut"></input>
+            </p>
+          </div>
 
           <div class="field">
-            <p class="control">
+            <p class="control">              
               <textarea required class="textarea" placeholder="Add a comment..." v-model="comentario.msj"></textarea>
             </p>
           </div>
@@ -113,8 +144,10 @@ export default {
       //Modelo
       comentario: {
         msj: null,
+        aut: null,
       },
       mensaje:null,
+      author:null,
       mensajes:[],
     }
   },
@@ -133,9 +166,11 @@ export default {
       this.mensajes=[]
       for(let key in mensajes){
         this.mensajes.push({
-         mensaje:mensajes[key].mensaje
+         mensaje:mensajes[key].mensaje,
+         author:mensajes[key].author
         })
       }
+      console.log(mensajes)
       
     },
     mapWikidata(data) {
@@ -198,8 +233,10 @@ export default {
       }
 
       db.ref(`peliculas/${this.id}`).push({
-        mensaje:this.comentario.msj
+        mensaje:this.comentario.msj,
+        author:this.comentario.aut
       }).then(()=>this.comentario.msj='')
+      console.log()
     }
      
   },
