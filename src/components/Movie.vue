@@ -38,7 +38,7 @@
         </div>
         <div class="tile is-child box">
           <center>
-            <youtube :video-id="videoId" player-width="320" player-height="100" :player-vars="{ autoplay: 1 }"></youtube>
+            <youtube :video-id="videoId" player-width="320" player-height="100" :player-vars="{ autoplay: 0 }"></youtube>
           </center>
         </div>
       </div>
@@ -57,6 +57,12 @@
         </div>
       </div>
     </div>
+  <br>
+  <ul>
+    <li v-for="m in mensajes">
+      {{m.mensaje}}
+    </li>
+  </ul>
 
     <br><br><br>
     <form @submit.prevent="enviar">
@@ -94,6 +100,7 @@
 
 <script>
 import axios from 'axios'
+import Firebase from 'firebase';
 export default {
   props: ['id'],
   data() {
@@ -105,20 +112,32 @@ export default {
       videoId: 'W6CjO0H2j0s',
       //Modelo
       comentario: {
-        id:this.id,
         msj: null,
-
-      }
-
+      },
+      mensaje:null,
+      mensajes:[],
     }
   },
   created() {
     this.geturl();
+    var db = Firebase.database();
+    db.ref(`peliculas/${this.id}`)
+    .on('value',snapshot =>this.cargarMensajes(snapshot.val()));
   },
   mounted() {
     window.document.title = this.id + " - RYM!"
   },
   methods: {
+    cargarMensajes(mensajes){
+      // console.log(mensajes)
+      this.mensajes=[]
+      for(let key in mensajes){
+        this.mensajes.push({
+         mensaje:mensajes[key].mensaje
+        })
+      }
+      
+    },
     mapWikidata(data) {
       return data.map(function(m) {
         const obj = {};
@@ -173,10 +192,14 @@ export default {
         });
     },
     enviar() {
+      var db = Firebase.database();
       for (let key in this.comentario) {
         console.info(`${key} : ${this.comentario[key]}`)
       }
-      this.comentario.msj=null
+
+      db.ref(`peliculas/${this.id}`).push({
+        mensaje:this.comentario.msj
+      }).then(()=>this.comentario.msj='')
     }
      
   },

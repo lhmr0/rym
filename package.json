@@ -12,12 +12,14 @@
   "dependencies": {
     "axios": "^0.16.2",
     "buefy": "^0.5.2",
+    "firebase": "^4.4.0",
     "lodash.debounce": "^4.0.8",
     "style-loader": "^0.18.2",
-    "vue": "^2.3.3",
+    "vue": "^2.4.4",
     "vue-gh-pages": "^1.5.0",
     "vue-router": "^2.7.0",
-    "vue-youtube-embed": "^2.1.2"
+    "vue-youtube-embed": "^2.1.2",
+    "vuefire": "^1.4.4"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
