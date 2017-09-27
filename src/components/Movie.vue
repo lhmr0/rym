@@ -15,13 +15,15 @@
       <h2 class="subtitle">
        <center> <img :src="uri" alt=" Rate your movie!" height="350" width="300"></center>
       </h2>
+      <center> <a :href="netflix" > <img src="https://orig00.deviantart.net/2074/f/2016/352/e/b/netflix_honeycomb_icon_by_roxor470-das00oc.png" alt=" Rate your movie!" height="50" width="50"></a> 
+        </center>
 
    <div class="tile is-ancestor">
   <div class="tile is-vertical is-8">
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification is-dark">
-         <p class="title">Director(es):</p>
+         <p class="title">Director(es): {{movie.identificador_Netflix}}</p>
           <p v-for="nom in movie.crew">
             {{nom}}
           </p>
@@ -52,11 +54,12 @@
   <div class="tile is-parent">
     <article class="tile is-child notification is-dark">
      <p class="title">Detalles:</p>
-         <p>Productoras:</p>
+         <p>Productora(s):</p>
           <p v-for="nom in movie.producers">
             {{nom}}
           </p>
-          <p>Duración: {{movie.movieDuration }}</p>
+          <p>Duración: {{movie.movieDuration}} minutos</p>
+         
           <p>Género(s): </p>
           <p v-for="nom in movie.genre">
             {{nom}}
@@ -199,9 +202,9 @@ export default {
       this.loading = true;
       axios.get(`
    https://query.wikidata.org/sparql?format=json&query=SELECT DISTINCT ?nom_productora ?image ?movieLabel  ?genre ?identificador_Netflix ?nombre_director ?reparto ?movieDuration WHERE {
-  wd:${this.id} rdfs:label ?movieLabel.
-  ?miembro_del_reparto rdfs:label ?reparto.
+  wd:${this.id} rdfs:label ?movieLabel.  
   wd:${this.id} wdt:P161 ?miembro_del_reparto. 
+  ?miembro_del_reparto rdfs:label ?reparto.
   OPTIONAL { wd:${this.id}  wdt:P136 ?movieGenre. }
   OPTIONAL { ?movieGenre rdfs:label ?genre. }
   OPTIONAL { wd:${this.id}  wdt:P1874 ?identificador_Netflix. }
@@ -256,14 +259,19 @@ export default {
   },
 
   computed: {
-
     uri() {
       try {
         return this.movie.image;
       } catch (error) {
         return "http://lacosacine.com/www/resize/aHR0cDovL3NpdGUubGFjb3NhY2luZS5jb20vaW1nL2dhbGVyaWEvMjI3MGQ3IC0gQ1VBTlRBUyBWRUNFUyBQT1IgQcOD4oCYTyBWQU1PUyBBTCBDSU5FLmpwZw==/80/220/"
+      }  
+    },
+     netflix() {
+      try {
+        return "https://netflix.com/watch/"+this.movie.identificador_Netflix;
+      } catch (error) {
+        return "http://netflix.com"
       }
-
     },
   }
 }
