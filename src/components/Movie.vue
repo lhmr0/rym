@@ -5,11 +5,13 @@
     <div class="container">
       <h1 class="title">
       <center> {{movie.movieLabel }}</center>
+     <center> <h1 v-if="loading">Cargando...</h1></center>
       </h1>
       </div>
   </div>
 
 </section>
+<br>
       <h2 class="subtitle">
        <center> <img :src="uri" alt=" Rate your movie!" height="350" width="300"></center>
       </h2>
@@ -101,14 +103,23 @@
             </figure>
 
         <div class="media-content">
-         <div class="field">
-            <p class="control">              
-              <input required class="input" placeholder="Add an author" v-model="comentario.aut"></input>
-            </p>
+         <div class="field">            
+          <b-field label="Author">
+           <b-input placeholder="Author..."
+                type="search"
+                icon-pack="fa"
+                icon="user"
+                v-model="comentario.aut"
+                required>
+            </b-input>
+            </b-field>
           </div>
-
+          
+        
           <div class="field">
-            <p class="control">              
+            <p class="control">  
+            <b-field label="Comment">  
+            </b-field>          
               <textarea required class="textarea" placeholder="Add a comment..." v-model="comentario.msj"></textarea>
             </p>
           </div>
@@ -236,7 +247,10 @@ export default {
         mensaje:this.comentario.msj,
         author:this.comentario.aut
       }).then(()=>this.comentario.msj='')
-      console.log()
+      console.log(new Date() | moment("H:MM  DD/MM/YYYY"))
+    },
+    hora(){
+      var fecha = new Date() | moment("H:MM  DD/MM/YYYY");
     }
      
   },

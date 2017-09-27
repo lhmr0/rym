@@ -15,6 +15,7 @@ Vue.use(VueRouter);
 Vue.use(Buefy);
 Vue.use(VueYouTubeEmbed);
 Vue.use(VueFire);
+Vue.use(require('vue-moment'));
 
 //instanciamos
 const router = new VueRouter({	
