@@ -23,7 +23,7 @@
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification is-dark">
-         <p class="title">Director(es): {{movie.identificador_Netflix}}</p>
+         <p class="title">Director(es):</p>
           <p v-for="nom in movie.crew">
             {{nom}}
           </p>
