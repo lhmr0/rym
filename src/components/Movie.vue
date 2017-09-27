@@ -33,7 +33,7 @@
           <b-panel header="Abrir/Cerrar" has-custom-template collapsible :open.sync="isOpen">
             <div class="panel-block">
               <div class="content">
-                <p v-for="nom in movie.repart">
+                <p v-for="nom in movie.repart" class="blanco">
                   {{nom}}
                 </p>
               </div>
@@ -240,6 +240,9 @@ export default {
           this.movie.producers = Object.keys(groupBy(results, 'nom_productora'));
         });
     },
+    getYoutube(){
+
+    },
     enviar() {
       var db = Firebase.database();
       for (let key in this.comentario) {
@@ -266,17 +269,15 @@ export default {
         return "http://lacosacine.com/www/resize/aHR0cDovL3NpdGUubGFjb3NhY2luZS5jb20vaW1nL2dhbGVyaWEvMjI3MGQ3IC0gQ1VBTlRBUyBWRUNFUyBQT1IgQcOD4oCYTyBWQU1PUyBBTCBDSU5FLmpwZw==/80/220/"
       }  
     },
-     netflix() {
-      try {
-        return "https://netflix.com/watch/"+this.movie.identificador_Netflix;
-      } catch (error) {
-        return "http://netflix.com"
-      }
+     netflix() {     
+       return "https://netflix.com/watch/"+this.movie.identificador_Netflix;     
     },
   }
 }
 </script>
 
 <style>
-
+.blanco {
+    color:white;
+  }
 </style>
