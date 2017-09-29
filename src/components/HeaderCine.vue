@@ -1,11 +1,30 @@
 <template>
+    
     <div>
-        <nav class="navbar is-active" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-black" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <router-link to="/" class="navbar-item" tag="a">
                     <img src="https://www.mariowiki.com/images/thumb/f/f5/StarMK8.png/200px-StarMK8.png" alt=" Rate your movie!" width="30" height="30">
                     <strong> RATE YOUR MOVIE! </strong>
                 </router-link>
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                          <p class="control">
+                            <a class="bd-tw-button button"
+                                  data-social-network="Twitter"
+                                  data-social-action="tweet"
+                                  data-social-target="http://bulma.io"
+                                  target="_blank"
+                                  href="https://twitter.com/intent/tweet?text=Search and rate a movie! ">
+                                  <span class="icon">
+                                    <i class="fa fa-twitter"></i>
+                                  </span>
+                                  <span>
+                                    Tweet
+                                  </span></a>
+                          </p>
+                        </div>
+                      </div>
                 <div class="navbar-burger burger" data-target="navmenu">
                     <span></span>
                     <span></span>
@@ -17,12 +36,16 @@
                     <router-link class="navbar-item " to="/" active-class="is-active" exact>SEARCH</router-link>
                     <router-link class="navbar-item" to="/categories" active-class="is-active">CATEGORIES</router-link>
                     <router-link class="navbar-item" to="/about" active-class="is-active">ABOUT</router-link>
+                    <router-link class="navbar-item" to="/about" active-class="is-active">CONTACT US</router-link>
 
                 </div>
             </div>
+    
         </nav>
 
     </div>
+
+
 </template>
 
 <script>
