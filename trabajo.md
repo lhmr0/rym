@@ -17,6 +17,7 @@ Informe
 29/09
 ===========
 * **Renderizado offline**
+https://alligator.io/vuejs/basic-ssr/
 * **categorias**
 * **contacto**
 
