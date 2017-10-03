@@ -36,7 +36,7 @@
                     <router-link class="navbar-item " to="/" active-class="is-active" exact>SEARCH</router-link>
                     <router-link class="navbar-item" to="/categories" active-class="is-active">CATEGORIES</router-link>
                     <router-link class="navbar-item" to="/about" active-class="is-active">ABOUT</router-link>
-                    <router-link class="navbar-item" to="/about" active-class="is-active">CONTACT US</router-link>
+                    <router-link class="navbar-item" to="/contact" active-class="is-active">CONTACT US</router-link>
 
                 </div>
             </div>
