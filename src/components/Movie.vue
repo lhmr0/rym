@@ -1,6 +1,6 @@
 <template>
   <div class="container is-mobile">    
-<section class="hero is-dark">
+<section class="hero">
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
@@ -22,18 +22,18 @@
   <div class="tile is-vertical is-8">
     <div class="tile">
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-dark">
+        <article class="tile is-child notification">
          <p class="title">Director(es):</p>
           <p v-for="nom in movie.crew">
             {{nom}}
           </p>
         </article>
-        <article class="tile is-child notification is-dark">
+        <article class="tile is-child notification">
          <p class="title">Reparto:</p>
           <b-panel header="Abrir/Cerrar" has-custom-template collapsible :open.sync="isOpen">
             <div class="panel-block">
               <div class="content">
-                <p v-for="nom in movie.repart" class="blanco">
+                <p v-for="nom in movie.repart">
                   {{nom}}
                 </p>
               </div>
@@ -42,8 +42,7 @@
         </article>
       </div>
       <div class="tile is-parent">
-        <article class="tile is-child notification is-dark">
-          <p class="title">Trailer</p>
+        <article class="tile is-child notification">
           <center>
             <youtube :video-id="videoId" player-width="300" player-height="220"></youtube>
           </center>
@@ -52,7 +51,7 @@
     </div>
   </div>
   <div class="tile is-parent">
-    <article class="tile is-child notification is-dark">
+    <article class="tile is-child notification">
      <p class="title">Detalles:</p>
          <p>Productora(s):</p>
           <p v-for="nom in movie.producers">
@@ -70,7 +69,7 @@
 
 
 <div class="tile is-parent">
-      <article class="tile is-child notification is-dark">
+      <article class="tile is-child notification">
          <div class="content">       
           <p class="title">Comentarios:</p>
           
@@ -183,9 +182,7 @@ export default {
          mensaje:mensajes[key].mensaje,
          author:mensajes[key].author
         })
-      }
-      console.log(mensajes)
-      
+      } 
     },
     mapWikidata(data) {
       return data.map(function(m) {
@@ -253,7 +250,6 @@ export default {
         mensaje:this.comentario.msj,
         author:this.comentario.aut
       }).then(()=>this.comentario.msj='')
-      console.log(new Date() | moment("H:MM  DD/MM/YYYY"))
     },
     hora(){
       var fecha = new Date() | moment("H:MM  DD/MM/YYYY");

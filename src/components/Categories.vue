@@ -6,128 +6,107 @@
 
      <div class="container is-fullhd is-centered"> 
 
-     <a class="button is-primary" @click="mensaje(28)">  
+     <a class="button is-primary" @click="mensaje('Q188473')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Accion</span>
      </a>
-     <a class="button is-primary" @click="mensaje(12)">  
+     <a class="button is-primary" @click="mensaje('Q319221')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Aventura</span>
      </a>
-     <a class="button is-primary" @click="mensaje(16)">  
+     <a class="button is-primary" @click="mensaje('Q202866')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Animación</span>
      </a>
-     <a class="button is-primary" @click="mensaje(35)">  
+     <a class="button is-primary" @click="mensaje('Q157443')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Comedia</span>
      </a>
-    <br><br>    
-    <a class="button is-primary" @click="mensaje(80)">  
-        <span class="icon">
-          <i class="fa fa-film"></i>
-        </span>
-        <span>Crimen</span>
-     </a>
-    <a class="button is-primary" @click="mensaje(99)">  
+    <br><br>       
+    <a class="button is-primary" @click="mensaje('Q93204')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Documental</span>
      </a>
-    <a class="button is-primary" @click="mensaje(18)">  
+    <a class="button is-primary" @click="mensaje('Q130232')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Drama</span>
      </a>
-     <a class="button is-primary" @click="mensaje(10751)">  
+     <a class="button is-primary" @click="mensaje('Q1361932')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Familia</span>
      </a>
     <br><br>  
-    <a class="button is-primary" @click="mensaje(14)">  
+    <a class="button is-primary" @click="mensaje('Q157394')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Fantasía</span>
-     </a>
-    <a class="button is-primary" @click="mensaje(36)">  
-        <span class="icon">
-          <i class="fa fa-film"></i>
-        </span>
-        <span>Historia</span>
-     </a>
-    <a class="button is-primary" @click="mensaje(27)">  
+     </a> 
+    <a class="button is-primary" @click="mensaje('Q200092')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Terror</span>
      </a>
-    <a class="button is-primary" @click="mensaje(10402)">  
+    <a class="button is-primary" @click="mensaje('Q842256')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Música</span>
      </a>
     <br><br>  
-    <a class="button is-primary" @click="mensaje(9648)">  
+    <a class="button is-primary" @click="mensaje('Q1200678')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Misterio</span>
      </a>
-     <a class="button is-primary" @click="mensaje(10749)">  
+     <a class="button is-primary" @click="mensaje('Q1054574')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Romance</span>
      </a>
-     <a class="button is-primary" @click="mensaje(878)">  
+     <a class="button is-primary" @click="mensaje('Q471839')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Ciencia Ficción</span>
-     </a>
-     <a class="button is-primary" @click="mensaje(10770)">  
-        <span class="icon">
-          <i class="fa fa-film"></i>
-        </span>
-        <span>Película de TV</span>
      </a>    
      <br><br>  
-     <a class="button is-primary" @click="mensaje(53)">  
+     <a class="button is-primary" @click="mensaje('Q19367312')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Suspenso</span>
      </a>
-     <a class="button is-primary" @click="mensaje(10752)">  
+     <a class="button is-primary" @click="mensaje('Q369747')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Guerra</span>
      </a>
-     <a class="button is-primary" @click="mensaje(37)">  
+     <a class="button is-primary" @click="mensaje('Q172980')">  
         <span class="icon">
           <i class="fa fa-film"></i>
         </span>
         <span>Western</span>
      </a>
-    </div>
-  <p v-for="nom in data.genres" >
-                {{nom.id}}
-    </p><br> 
+    </div>  
     </div>
 
 
@@ -139,7 +118,7 @@
 import axios from 'axios'
 export default {
     created(){
-        window.document.title="Categories"
+        window.document.title="Categories";
     },
   data() {
     return {
@@ -149,8 +128,7 @@ export default {
 
   methods: {
     mensaje(dato){
-          console.log(dato)
-          this.$router.push('/categories/'+dato)
+          this.$router.push('/categories/'+dato);
         }
   },
   }
