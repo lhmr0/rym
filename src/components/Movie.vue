@@ -245,7 +245,7 @@ export default {
 
     },
     getYoutube(){
-      axios.get(`https://www.googleapis.com/youtube/v3/search?part=id&q=${this.titulo}&type=video&key=AIzaSyAHyQ-GlNMGVxECRjRyInBDNJS-pf7biVQ`).then((response) => {         
+      axios.get(`https://www.googleapis.com/youtube/v3/search?part=id&q=${this.titulo} trailer&type=video&key=AIzaSyAHyQ-GlNMGVxECRjRyInBDNJS-pf7biVQ`).then((response) => {         
           this.loading = false;
            const results = response.data.items;           
            if(this.titulo=="undefined"){
