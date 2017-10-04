@@ -5,7 +5,8 @@
     <div class="container">
       <h1 class="title">
       <center> {{movie.movieLabel }}</center>
-     <center> <h1 v-if="loading">Cargando...</h1></center>
+     <center> <h1 v-if="loading">Cargando...{{this.mensaje}}</h1></center>
+        <center> <h1 ></h1></center>
       </h1>
       </div>
   </div>
@@ -148,6 +149,7 @@ import Firebase from 'firebase';
 export default {
   props: ['id'],
   titulo: "",
+  mensaje: "",
   data() {
     return {
       loading: false,
@@ -166,16 +168,21 @@ export default {
     }
   },
   created() {
-    this.geturl();    
-   
+    this.geturl();       
     var db = Firebase.database();
     db.ref(`peliculas/${this.id}`)
     .on('value',snapshot =>this.cargarMensajes(snapshot.val()));
     window.document.title = "RYM!";    
-  },
-  updated() {    
+    
+  },  
+  beforeUpdate() {   
      this.getYoutube();
-    window.document.title = this.titulo + " - RYM!";
+    window.document.title = this.titulo + " - RYM!";  
+
+  },
+  updated() {  
+
+    setTimeout(this.existe, 9000);
   },
   methods: {
     cargarMensajes(mensajes){
@@ -225,6 +232,7 @@ export default {
        `)
         .then((response) => {
           const self = this;
+          console.log("hola");
           this.loading = false;
           const results = self.mapWikidata(response.data.results.bindings);
           this.movie = results[0];                    
@@ -245,10 +253,10 @@ export default {
 
     },
     getYoutube(){
-      axios.get(`https://www.googleapis.com/youtube/v3/search?part=id&q=${this.titulo} trailer&type=video&key=AIzaSyAHyQ-GlNMGVxECRjRyInBDNJS-pf7biVQ`).then((response) => {         
+      axios.get(`https://www.googleapis.com/youtube/v3/search?part=id&q=${this.titulo} trailer&type=video&key=AIzaSyAHyQ-GlNMGVxECRjRyInBDNJS-pf7biVQ`).then((response) => {       
           this.loading = false;
            const results = response.data.items;           
-           if(this.titulo=="undefined"){
+           if (typeof(this.titulo) == 'undefined'){
             this.videoId = "W6CjO0H2j0s";
            }else{
             this.videoId = results[0].id.videoId;
@@ -265,6 +273,14 @@ export default {
         mensaje:this.comentario.msj,
         author:this.comentario.aut
       }).then(()=>this.comentario.msj='')
+    },
+    existe() {     
+     if (typeof(this.titulo) == 'undefined') {
+      console.log("no existe");
+      console.log(this.movie)
+      this.mensaje = "Error con wikidata";
+      window.document.title = this.mensaje + " - RYM!";  
+      }
     },
      
   },
