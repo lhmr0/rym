@@ -3,10 +3,10 @@
     <section class="hero is-fullheight">
     <div class="hero-body">
     <div class="container">
-      <h1 class="title">
+      <h1 class="title blanco">
       Welcome
       </h1>
-      <h2 class="subtitle">
+      <h2 class="subtitle blanco">
       SEARCH AND RATE
       </h2>
       <b-autocomplete  v-model="name" :data="data" placeholder="Search a movie title..." icon="search" field="title" :loading="isFetching" @input="getAsyncData" @select="option => selected = option">
@@ -120,5 +120,8 @@
     -moz-background-size:cover;
     -o-background-size:cover;
     background-size:cover;    
+  }
+  .blanco {
+    color:white;
   }
 </style>
