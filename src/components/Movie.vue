@@ -44,7 +44,7 @@
       <div class="tile is-parent">
         <article class="tile is-child notification">
           <center>
-            <youtube :video-id="videoId" player-width="300" player-height="220"></youtube>
+            <youtube :video-id="videoId" player-width="300" player-height="350"></youtube>
           </center>
         </article>
       </div>
@@ -147,12 +147,13 @@ import axios from 'axios'
 import Firebase from 'firebase';
 export default {
   props: ['id'],
+  titulo: "",
   data() {
     return {
       loading: false,
       newlink: "",
       movie: {},
-      isOpen: false,
+            isOpen: false,
       videoId: 'W6CjO0H2j0s',
       //Modelo
       comentario: {
@@ -165,13 +166,16 @@ export default {
     }
   },
   created() {
-    this.geturl();
+    this.geturl();    
+   
     var db = Firebase.database();
     db.ref(`peliculas/${this.id}`)
     .on('value',snapshot =>this.cargarMensajes(snapshot.val()));
+    window.document.title = "RYM!";    
   },
-  mounted() {
-    window.document.title = this.id + " - RYM!"
+  updated() {    
+     this.getYoutube();
+    window.document.title = this.titulo + " - RYM!";
   },
   methods: {
     cargarMensajes(mensajes){
@@ -223,7 +227,7 @@ export default {
           const self = this;
           this.loading = false;
           const results = self.mapWikidata(response.data.results.bindings);
-          this.movie = results[0];
+          this.movie = results[0];                    
           // this.link = this.data.image.value
           var groupBy = function(xs, key) {
             return xs.reduce(function(rv, x) {
@@ -235,10 +239,21 @@ export default {
           this.movie.repart = Object.keys(groupBy(results, 'reparto'));
           this.movie.genre = Object.keys(groupBy(results, 'genre'));
           this.movie.producers = Object.keys(groupBy(results, 'nom_productora'));
+          this.movie.name = Object.keys(groupBy(results, 'movieLabel'));
+          this.titulo = this.movie.name[0];
         });
+
     },
     getYoutube(){
-
+      axios.get(`https://www.googleapis.com/youtube/v3/search?part=id&q=${this.titulo}&type=video&key=AIzaSyAHyQ-GlNMGVxECRjRyInBDNJS-pf7biVQ`).then((response) => {         
+          this.loading = false;
+           const results = response.data.items;           
+           if(this.titulo=="undefined"){
+            this.videoId = "W6CjO0H2j0s";
+           }else{
+            this.videoId = results[0].id.videoId;
+           }
+        });
     },
     enviar() {
       var db = Firebase.database();
@@ -251,9 +266,6 @@ export default {
         author:this.comentario.aut
       }).then(()=>this.comentario.msj='')
     },
-    hora(){
-      var fecha = new Date() | moment("H:MM  DD/MM/YYYY");
-    }
      
   },
 
