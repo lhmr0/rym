@@ -18,6 +18,7 @@ Informe
 ===========
 * **Renderizado offline**
 https://alligator.io/vuejs/basic-ssr/
+https://ssr.vuejs.org/en/basic.html
 https://github.com/vuejs/vue-hackernews-2.0
 * **Sitemap**
 * **Actores**
