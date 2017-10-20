@@ -14,12 +14,14 @@ Informe
 * Ejemplos de json-ld o rdfa
 * Resultados / Indexación.
 
-29/09
+20/10
 ===========
 * **Renderizado offline**
 https://alligator.io/vuejs/basic-ssr/
-* **categorias**
-* **contacto**
+* **Sitemap**
+* **Actores**
+* **Rating**
+
 
 SELECT ?movie ?movieLabel   WHERE {
     ?movie wdt:P31 wd:Q11424.
